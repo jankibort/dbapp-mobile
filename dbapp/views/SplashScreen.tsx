@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import { Dimensions, Image, StyleSheet, Text, View } from 'react-native';
+import { Button } from '../components/Button';
 
 export const SplashScreen: FC = () => {
   return (
@@ -12,14 +13,16 @@ export const SplashScreen: FC = () => {
         />
       </View>
       <View style={styles.uiContainer}>
-        <Text style={styles.containerText}>hello</Text>
+        <Text style={styles.containerText}>Take care of your diabetes!</Text>
+        <Button onPress={() => console.log('pressed')} title="Sign In" />
+        {/* <Button onPress={} title="Sign Up" /> */}
       </View>
     </View>
   );
 };
 
-const { height } = Dimensions.get('screen');
-const logoSize = height * 0.3;
+const { width } = Dimensions.get('screen');
+const logoSize = width * 0.8;
 
 const styles = StyleSheet.create({
   container: {
@@ -30,12 +33,12 @@ const styles = StyleSheet.create({
   },
   logoWrapper: {
     flex: 2,
-    display: 'flex',
     alignItems: 'center',
+    justifyContent: 'center',
   },
   logo: {
-    width: logoSize * 1.38,
-    height: logoSize,
+    width: logoSize,
+    height: logoSize * 0.65,
   },
   uiContainer: {
     flex: 1,
@@ -48,5 +51,6 @@ const styles = StyleSheet.create({
   containerText: {
     color: 'white',
     fontWeight: '500',
+    fontSize: 22,
   },
 });
