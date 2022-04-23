@@ -1,9 +1,11 @@
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React, { FC, useState } from 'react';
+import { useContext } from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { Button, ControlledInput } from '../../components';
 import { COLORS } from '../../constants';
+import { UserContext, UserType } from '../../context/UserContext';
 import { NonAuthStackParams } from './NonAuthenticatedView';
 
 const FormState = {
@@ -13,6 +15,7 @@ const FormState = {
 
 export const SignInScreen: FC = () => {
   const [formState, setFormState] = useState<typeof FormState>(FormState);
+  const { setLoggedUser } = useContext(UserContext);
 
   const navigation =
     useNavigation<NativeStackNavigationProp<NonAuthStackParams>>();
@@ -24,7 +27,8 @@ export const SignInScreen: FC = () => {
     setFormState({ ...formState, [target]: value });
   };
 
-  const handleSignIn = () => {
+  const handleSignIn = (data: UserType) => {
+    setLoggedUser(data);
     console.log('have tried to sign in');
   };
 

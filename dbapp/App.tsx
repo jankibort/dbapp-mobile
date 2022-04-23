@@ -1,13 +1,16 @@
 import { NavigationContainer } from '@react-navigation/native';
-import { useState } from 'react';
+import { useContext } from 'react';
 import { NonAuthenticatedView } from './views/NonAuthenticated/NonAuthenticatedView';
 import { AuthenticatedView } from './views/Authenticated/AuthenticatedView';
+import { UserContext, UserCtxProvider } from './context/UserContext';
 
 export default function App() {
-  const [isLogged, setLogged] = useState<boolean>(false);
+  const { loggedUser } = useContext(UserContext);
   return (
-    <NavigationContainer>
-      {isLogged ? <AuthenticatedView /> : <NonAuthenticatedView />}
-    </NavigationContainer>
+    <UserCtxProvider>
+      <NavigationContainer>
+        {loggedUser ? <AuthenticatedView /> : <NonAuthenticatedView />}
+      </NavigationContainer>
+    </UserCtxProvider>
   );
 }
