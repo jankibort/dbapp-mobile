@@ -1,66 +1,50 @@
 import React, { FC } from 'react';
 import {
-  Button as RnButton,
   NativeSyntheticEvent,
   NativeTouchEvent,
   Pressable,
+  StyleProp,
   StyleSheet,
   Text,
+  TextStyle,
+  ViewStyle,
 } from 'react-native';
-
-export enum ButtonTypes {
-  circle,
-  normal,
-}
-
-export enum ButtonThemes {
-  primary,
-  danger,
-  warning,
-  info,
-}
 
 type Props = {
   title: string;
   onPress: (ev: NativeSyntheticEvent<NativeTouchEvent>) => void;
-  type?: ButtonTypes;
-  theme?: ButtonThemes;
-  style?: null;
+  buttonStyle?: ViewStyle;
+  labelStyle?: StyleProp<TextStyle>;
 };
 
 export const Button: FC<Props> = ({
   title,
   onPress,
-  type = ButtonTypes.normal,
-  theme = ButtonThemes.primary,
-  style,
+  buttonStyle,
+  labelStyle,
   ...rest
 }) => {
   return (
     <Pressable
       onPress={onPress}
-      style={(styles[type], styles[theme], style)}
+      style={[buttonStyle, styles.buttonShape]}
       {...rest}
     >
-      <Text>{title}</Text>
+      <Text style={[labelStyle]}>{title}</Text>
     </Pressable>
   );
 };
 
 const styles = StyleSheet.create({
-  [ButtonTypes.normal]: {
+  buttonShape: {
+    alignSelf: 'flex-start',
+    textAlignVertical: 'center',
+    alignItems: 'center',
+    paddingVertical: 5,
+    paddingHorizontal: 10,
     borderRadius: 6,
-  },
-  [ButtonThemes.primary]: {
-    backgroundColor: '#317cf5',
-  },
-  [ButtonThemes.danger]: {
-    backgroundColor: '#c22338',
-  },
-  [ButtonThemes.info]: {
-    backgroundColor: '#2cd4d4',
-  },
-  [ButtonThemes.warning]: {
-    backgroundColor: '#c2a023',
+    justifyContent: 'space-around',
+    alignContent: 'center',
+    minHeight: 26,
   },
 });

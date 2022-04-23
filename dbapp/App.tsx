@@ -1,21 +1,13 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import { Login } from './views/Login';
-import { SplashScreen } from './views/SplashScreen';
+import { NavigationContainer } from '@react-navigation/native';
+import { useState } from 'react';
+import { NonAuthenticatedView } from './views/NonAuthenticated/NonAuthenticatedView';
+import { AuthenticatedView } from './views/Authenticated/AuthenticatedView';
 
 export default function App() {
+  const [isLogged, setLogged] = useState<boolean>(false);
   return (
-    // <View style={styles.container}>
-    <SplashScreen />
-    // </View>
+    <NavigationContainer>
+      {isLogged ? <AuthenticatedView /> : <NonAuthenticatedView />}
+    </NavigationContainer>
   );
 }
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     backgroundColor: '#fff',
-//     alignItems: 'center',
-//     justifyContent: 'center',
-//   },
-// });

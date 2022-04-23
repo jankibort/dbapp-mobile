@@ -1,23 +1,38 @@
 import React, { FC } from 'react';
 import { StyleSheet, TextInput } from 'react-native';
+import { COLORS } from '../constants';
 
 type Props = {
   onChange: ((text: string) => void) | undefined;
+  value: string;
+  type?: 'text' | 'password';
 };
 
-export const ControlledInput: FC<Props> = ({ onChange }) => {
+export const ControlledInput: FC<Props> = ({
+  onChange,
+  value,
+  type = 'text',
+  ...restProps
+}) => {
   return (
-    <>
-      <TextInput onChangeText={onChange} style={styles.input} />;
-    </>
+    <TextInput
+      {...restProps}
+      value={value}
+      onChangeText={onChange}
+      style={styles.input}
+      secureTextEntry={type === 'password' && true}
+    />
   );
 };
 
 const styles = StyleSheet.create({
   input: {
+    backgroundColor: COLORS.LIGHT,
+    borderColor: COLORS.PRIMARY,
     height: 36,
-    margin: 12,
+    marginVertical: 12,
     borderWidth: 1,
     padding: 10,
+    borderRadius: 6,
   },
 });
