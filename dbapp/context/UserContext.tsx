@@ -1,19 +1,24 @@
 import { useState, createContext, FC, SetStateAction, Dispatch } from 'react';
 
 type UserContextType = {
-  loggedUser?: null | UserType;
-  setLoggedUser: Dispatch<SetStateAction<UserType | null>>;
+  loggedUser: UserType;
+  setLoggedUser?: Dispatch<SetStateAction<UserType>> | void;
 };
 
 export type UserType = {
   name: string;
   token: string;
+  isLogged: boolean;
+};
+
+const initialUser = {
+  name: '',
+  token: '',
+  isLogged: false,
 };
 
 export const UserCtxProvider: FC = ({ children }) => {
-  const [loggedUser, setLoggedUser] = useState<null | UserType>(null);
-
-  console.log(loggedUser);
+  const [loggedUser, setLoggedUser] = useState<UserType>(initialUser);
 
   return (
     <UserContext.Provider
@@ -27,4 +32,7 @@ export const UserCtxProvider: FC = ({ children }) => {
   );
 };
 
-export const UserContext = createContext<UserContextType | null>(null);
+export const UserContext = createContext<UserContextType>({
+  loggedUser: initialUser,
+  setLoggedUser: () => {},
+});

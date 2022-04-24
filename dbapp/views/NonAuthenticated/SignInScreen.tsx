@@ -6,7 +6,7 @@ import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { useToast } from 'react-native-toast-notifications';
 import { Button, ControlledInput } from '../../components';
 import { COLORS } from '../../constants';
-import { UserContext, UserType } from '../../context/UserContext';
+import { UserContext } from '../../context/UserContext';
 import { NonAuthStackParams } from './NonAuthenticatedView';
 
 const FormState = {
@@ -16,7 +16,7 @@ const FormState = {
 
 export const SignInScreen: FC = () => {
   const [formState, setFormState] = useState<typeof FormState>(FormState);
-  const UserCtx = useContext(UserContext);
+  const { setLoggedUser } = useContext(UserContext);
   const toast = useToast();
 
   const navigation =
@@ -30,17 +30,31 @@ export const SignInScreen: FC = () => {
   };
 
   const handleSignIn = () => {
+    toast.hideAll();
+
     if (
       formState.password === 'admin' &&
       formState.username === 'admin' &&
-      UserCtx
+      setLoggedUser
     ) {
-      UserCtx.setLoggedUser({
+      setLoggedUser({
         name: formState.username,
         token: 'some non-token value',
+        isLogged: true,
+      });
+      toast.show(`You have been logged in!`, {
+        duration: 4000,
+        animationType: 'zoom-in',
+        type: 'success',
+        placement: 'top',
       });
     } else {
-      toast.show('ERR', { type: 'danger', placement: 'top' });
+      toast.show(`Username & Password don't match!`, {
+        duration: 4000,
+        animationType: 'zoom-in',
+        type: 'danger',
+        placement: 'top',
+      });
       console.log('wrong login attempt');
     }
   };
