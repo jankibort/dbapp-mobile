@@ -3,6 +3,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React, { FC, useState } from 'react';
 import { useContext } from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { useToast } from 'react-native-toast-notifications';
 import { Button, ControlledInput } from '../../components';
 import { COLORS } from '../../constants';
 import { UserContext, UserType } from '../../context/UserContext';
@@ -15,7 +16,8 @@ const FormState = {
 
 export const SignInScreen: FC = () => {
   const [formState, setFormState] = useState<typeof FormState>(FormState);
-  const { setLoggedUser } = useContext(UserContext);
+  const UserCtx = useContext(UserContext);
+  const toast = useToast();
 
   const navigation =
     useNavigation<NativeStackNavigationProp<NonAuthStackParams>>();
@@ -27,9 +29,20 @@ export const SignInScreen: FC = () => {
     setFormState({ ...formState, [target]: value });
   };
 
-  const handleSignIn = (data: UserType) => {
-    setLoggedUser(data);
-    console.log('have tried to sign in');
+  const handleSignIn = () => {
+    if (
+      formState.password === 'admin' &&
+      formState.username === 'admin' &&
+      UserCtx
+    ) {
+      UserCtx.setLoggedUser({
+        name: formState.username,
+        token: 'some non-token value',
+      });
+    } else {
+      toast.show('ERR', { type: 'danger', placement: 'top' });
+      console.log('wrong login attempt');
+    }
   };
 
   return (

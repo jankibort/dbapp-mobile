@@ -3,14 +3,22 @@ import { useContext } from 'react';
 import { NonAuthenticatedView } from './views/NonAuthenticated/NonAuthenticatedView';
 import { AuthenticatedView } from './views/Authenticated/AuthenticatedView';
 import { UserContext, UserCtxProvider } from './context/UserContext';
+import { ToastProvider } from 'react-native-toast-notifications';
 
 export default function App() {
-  const { loggedUser } = useContext(UserContext);
+  const UserCtx = useContext(UserContext);
+
   return (
     <UserCtxProvider>
-      <NavigationContainer>
-        {loggedUser ? <AuthenticatedView /> : <NonAuthenticatedView />}
-      </NavigationContainer>
+      <ToastProvider>
+        <NavigationContainer>
+          {UserCtx?.loggedUser ? (
+            <AuthenticatedView />
+          ) : (
+            <NonAuthenticatedView />
+          )}
+        </NavigationContainer>
+      </ToastProvider>
     </UserCtxProvider>
   );
 }
