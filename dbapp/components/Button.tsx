@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 
 type Props = {
-  title: string;
+  title: string | JSX.Element;
   onPress: (ev: NativeSyntheticEvent<NativeTouchEvent>) => void;
   buttonStyle?: ViewStyle;
   labelStyle?: StyleProp<TextStyle>;
