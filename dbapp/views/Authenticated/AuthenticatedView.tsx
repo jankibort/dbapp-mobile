@@ -1,49 +1,24 @@
+import 'react-native-gesture-handler';
 import React, { FC } from 'react';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { StatusScreen } from './StatusScreen';
 import { StyleSheet } from 'react-native';
-import { Button } from '../../components';
 import { COLORS } from '../../constants';
-import { useNavigation } from '@react-navigation/native';
-import { EntryScreen } from './EntryScreen';
-import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { createDrawerNavigator, DrawerView } from '@react-navigation/drawer';
+import { MainTabNavigator } from './MainTabNavigator';
 
-export type AuthTabParams = {
-  Status: undefined;
-  Entry: undefined;
+export type MainDrawerParams = {
+  Main: undefined;
 };
 
-const Tab = createMaterialBottomTabNavigator<AuthTabParams>();
+const Drawer = createDrawerNavigator<MainDrawerParams>();
 
 export const AuthenticatedView: FC = () => {
   return (
-    <Tab.Navigator
-      initialRouteName="Status"
-      activeColor={COLORS.LIGHT}
-      barStyle={{ backgroundColor: COLORS.COMPONENT.NON_AUTH_BG }}
+    <Drawer.Navigator
+      initialRouteName="Main"
+      screenOptions={{ headerShown: false }}
     >
-      <Tab.Screen
-        name="Status"
-        component={StatusScreen}
-        options={{
-          tabBarLabel: 'My Status',
-          tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="home" color={color} size={26} />
-          ),
-        }}
-      />
-      <Tab.Screen
-        name="Entry"
-        component={EntryScreen}
-        options={{
-          tabBarLabel: 'Add Record',
-          tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="plus" color={color} size={26} />
-          ),
-        }}
-      />
-    </Tab.Navigator>
+      <Drawer.Screen name="Main" component={MainTabNavigator} />
+    </Drawer.Navigator>
   );
 };
 

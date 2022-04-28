@@ -13,8 +13,8 @@ import {
 type Props = {
   title: string | JSX.Element;
   onPress: (ev: NativeSyntheticEvent<NativeTouchEvent>) => void;
-  buttonStyle?: ViewStyle;
-  labelStyle?: StyleProp<TextStyle>;
+  buttonStyle?: ViewStyle | ViewStyle[];
+  labelStyle?: StyleProp<TextStyle> | StyleProp<TextStyle>[];
 };
 
 export const Button: FC<Props> = ({
