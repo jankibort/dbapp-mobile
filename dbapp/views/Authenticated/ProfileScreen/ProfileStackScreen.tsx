@@ -17,9 +17,11 @@ export const ProfileStackScreen: FC = () => {
       initialRouteName="Profile"
       screenOptions={{ headerShown: true }}
     >
-      <ProfileStack.Screen name="Profile" component={ProfileScreen} />
-      <ProfileStack.Screen name="InsulinData" component={InsulinDataScreen} />
-      <ProfileStack.Screen name="DataShare" component={DataShareScreen} />
+      <ProfileStack.Screen
+        name="Profile"
+        component={ProfileScreen}
+        options={{ headerTitle: 'Profile' }}
+      />
     </ProfileStack.Navigator>
   );
 };

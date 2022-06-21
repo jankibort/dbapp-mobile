@@ -2,15 +2,14 @@ import React, { FC } from 'react';
 import 'react-native-gesture-handler';
 import { StatusScreen } from './StatusScreen';
 import { COLORS } from '../../constants';
-import { EntryScreen } from './EntryScreen';
+import { EntryStackScreen } from './EntryScreen';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
-import { CalendarScreen } from './CalendarScreen';
 import { ProfileStackScreen } from './ProfileScreen';
 
 export type AuthTabParams = {
   Status: undefined;
-  Entry: undefined;
+  EntryStack: undefined;
   ProfileStack: undefined;
   Calendar: undefined;
 };
@@ -35,8 +34,8 @@ export const MainTabNavigator: FC = () => {
         }}
       />
       <Tab.Screen
-        name="Entry"
-        component={EntryScreen}
+        name="EntryStack"
+        component={EntryStackScreen}
         options={{
           tabBarLabel: 'Add Record',
           tabBarIcon: ({ color }) => (
@@ -49,20 +48,9 @@ export const MainTabNavigator: FC = () => {
         }}
       />
       <Tab.Screen
-        name="Calendar"
-        component={CalendarScreen}
-        options={{
-          tabBarLabel: 'Calendar',
-          tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="calendar" color={color} size={26} />
-          ),
-        }}
-      />
-      <Tab.Screen
         name="ProfileStack"
         component={ProfileStackScreen}
         options={{
-          title: 'Profile',
           tabBarLabel: 'Profile',
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons

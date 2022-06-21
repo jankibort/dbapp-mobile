@@ -4,7 +4,7 @@ import { COLORS } from '../constants';
 
 type Props = {
   onChange: ((text: string) => void) | undefined;
-  value: string;
+  value: string | number;
   type?: 'text' | 'password';
 };
 
