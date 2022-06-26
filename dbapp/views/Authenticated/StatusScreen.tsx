@@ -63,9 +63,9 @@ export const StatusScreen: FC = () => {
           <Text style={styles.label}>Action hints!</Text>
           <Text style={styles.label}>
             {latestSugar.range === 'low' &&
-              `You require to eat aprox ${
-                ((130 - latestSugar.value) * 10) / isInsulinActive ? 20 : 35
-              } grams of carbohydrates! `}
+              `You require to eat aprox ${Math.round(
+                ((130 - latestSugar.value) * 10) / (isInsulinActive ? 20 : 37),
+              )} grams of carbohydrates! `}
             {isInsulinActive &&
               `You need to consume more due to active insulin.`}
           </Text>
