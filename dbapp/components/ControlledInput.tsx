@@ -4,14 +4,16 @@ import { COLORS } from '../constants';
 
 type Props = {
   onChange: ((text: string) => void) | undefined;
-  value: string | number;
+  value?: string;
   type?: 'text' | 'password';
+  disabled?: boolean;
 };
 
 export const ControlledInput: FC<Props> = ({
   onChange,
   value,
   type = 'text',
+  disabled,
   ...restProps
 }) => {
   return (
@@ -19,8 +21,9 @@ export const ControlledInput: FC<Props> = ({
       {...restProps}
       value={value}
       onChangeText={onChange}
-      style={styles.input}
+      style={[styles.input, disabled && styles.disabled]}
       secureTextEntry={type === 'password' && true}
+      editable={!disabled}
     />
   );
 };
@@ -34,5 +37,8 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     padding: 10,
     borderRadius: 6,
+  },
+  disabled: {
+    backgroundColor: COLORS.DISABLED,
   },
 });

@@ -6,7 +6,7 @@ import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { useToast } from 'react-native-toast-notifications';
 import { Button, ControlledInput } from '../../components';
 import { COLORS } from '../../constants';
-import { UserContext } from '../../context/UserContext';
+import { UserContext } from '../../context';
 import { NonAuthStackParams } from './NonAuthenticatedView';
 
 const FormState = {

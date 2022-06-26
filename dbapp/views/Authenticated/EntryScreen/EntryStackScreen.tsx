@@ -18,15 +18,18 @@ export const EntryStackScreen: FC = () => {
 
   useEffect(() => {
     navigation.navigate('Entry');
-    console.log('navigated to entry');
   }, []);
 
   return (
     <EntryStack.Navigator
       initialRouteName="Entry"
-      screenOptions={{ headerShown: false }}
+      screenOptions={{ headerShown: true }}
     >
-      <EntryStack.Screen name="Entry" component={EntryScreen} />
+      <EntryStack.Screen
+        name="Entry"
+        component={EntryScreen}
+        options={{ title: 'New entry' }}
+      />
     </EntryStack.Navigator>
   );
 };

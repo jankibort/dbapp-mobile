@@ -11,19 +11,19 @@ export type AuthTabParams = {
   Status: undefined;
   EntryStack: undefined;
   ProfileStack: undefined;
-  Calendar: undefined;
 };
 
-const Tab = createMaterialBottomTabNavigator<AuthTabParams>();
+export const MainTabNavigation =
+  createMaterialBottomTabNavigator<AuthTabParams>();
 
 export const MainTabNavigator: FC = () => {
   return (
-    <Tab.Navigator
+    <MainTabNavigation.Navigator
       initialRouteName="Status"
       activeColor={COLORS.LIGHT}
       barStyle={{ backgroundColor: COLORS.COMPONENT.NON_AUTH_BG }}
     >
-      <Tab.Screen
+      <MainTabNavigation.Screen
         name="Status"
         component={StatusScreen}
         options={{
@@ -33,7 +33,7 @@ export const MainTabNavigator: FC = () => {
           ),
         }}
       />
-      <Tab.Screen
+      <MainTabNavigation.Screen
         name="EntryStack"
         component={EntryStackScreen}
         options={{
@@ -47,7 +47,7 @@ export const MainTabNavigator: FC = () => {
           ),
         }}
       />
-      <Tab.Screen
+      <MainTabNavigation.Screen
         name="ProfileStack"
         component={ProfileStackScreen}
         options={{
@@ -61,6 +61,6 @@ export const MainTabNavigator: FC = () => {
           ),
         }}
       />
-    </Tab.Navigator>
+    </MainTabNavigation.Navigator>
   );
 };

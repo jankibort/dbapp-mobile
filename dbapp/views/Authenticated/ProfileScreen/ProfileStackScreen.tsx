@@ -1,7 +1,6 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React, { FC } from 'react';
 import { ProfileScreen } from './ProfileScreen';
-import { DataShareScreen, InsulinDataScreen } from './ProfileScreens';
 
 export type ProfileStackParams = {
   InsulinData: undefined;

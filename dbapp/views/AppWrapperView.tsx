@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { UserContext } from '../context/UserContext';
+import { UserContext } from '../context';
 import { AuthenticatedView } from './Authenticated';
 import { NonAuthenticatedView } from './NonAuthenticated';
 

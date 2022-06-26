@@ -1,1 +1,2 @@
-export { UserCtxProvider } from './UserContext';
+export { UserCtxProvider, UserContext } from './UserContext';
+export { SugarCtxProvider, SugarContext } from './SugarContex';

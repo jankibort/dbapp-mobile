@@ -1,18 +1,12 @@
-import { useNavigation } from '@react-navigation/native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React, { FC, useContext } from 'react';
 import { StyleSheet, Text } from 'react-native';
 import { Button } from '../../../components/Button';
 import { COLORS } from '../../../constants';
-import { UserContext } from '../../../context/UserContext';
-import { ProfileStackParams } from './ProfileStackScreen';
+import { UserContext } from '../../../context';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 export const ProfileScreen: FC = () => {
-  const navigation =
-    useNavigation<NativeStackNavigationProp<ProfileStackParams>>();
-
   const { setLoggedUser } = useContext(UserContext);
 
   return (
