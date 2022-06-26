@@ -1,21 +1,18 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import { Login } from './views/Login';
-import { SplashScreen } from './views/SplashScreen';
+import { NavigationContainer } from '@react-navigation/native';
+import { UserCtxProvider, SugarCtxProvider } from './context';
+import { ToastProvider } from 'react-native-toast-notifications';
+import { AppWrapperView } from './views/AppWrapperView';
 
 export default function App() {
   return (
-    // <View style={styles.container}>
-    <SplashScreen />
-    // </View>
+    <UserCtxProvider>
+      <SugarCtxProvider>
+        <ToastProvider>
+          <NavigationContainer>
+            <AppWrapperView />
+          </NavigationContainer>
+        </ToastProvider>
+      </SugarCtxProvider>
+    </UserCtxProvider>
   );
 }
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     backgroundColor: '#fff',
-//     alignItems: 'center',
-//     justifyContent: 'center',
-//   },
-// });
