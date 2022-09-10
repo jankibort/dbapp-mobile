@@ -10,7 +10,7 @@ import {
   ViewStyle,
 } from 'react-native';
 
-type Props = {
+export type TButtonProps = {
   title: string | JSX.Element;
   onPress: (ev: NativeSyntheticEvent<NativeTouchEvent>) => void;
   buttonStyle?: ViewStyle | ViewStyle[];
@@ -18,17 +18,19 @@ type Props = {
   testID?: string;
 };
 
-export const Button: FC<Props> = ({
+export const Button: FC<TButtonProps> = ({
   title,
   onPress,
   buttonStyle,
   labelStyle,
+  testID,
   ...rest
 }) => {
   return (
     <Pressable
       onPress={onPress}
       style={[buttonStyle, styles.buttonShape]}
+      testID={testID}
       {...rest}
     >
       <Text style={[labelStyle]}>{title}</Text>
@@ -36,7 +38,7 @@ export const Button: FC<Props> = ({
   );
 };
 
-const styles = StyleSheet.create({
+export const styles = StyleSheet.create({
   buttonShape: {
     alignSelf: 'flex-start',
     textAlignVertical: 'center',

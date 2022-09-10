@@ -1,62 +1,32 @@
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React, { FC, useState } from 'react';
-import { useContext } from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
-import { useToast } from 'react-native-toast-notifications';
-import { Button, ControlledInput } from '../../components';
-import { COLORS } from '../../constants';
-import { UserContext } from '../../context';
+import { Button, ControlledInput } from '../../../components';
+import { COLORS } from '../../constant';
 import { NonAuthStackParams } from './NonAuthenticatedView';
 
 const FormState = {
   username: '',
   password: '',
+  confirmPassword: '',
 };
 
-export const SignInScreen: FC = () => {
+export const SignUpScreen: FC = () => {
   const [formState, setFormState] = useState<typeof FormState>(FormState);
-  const { setLoggedUser } = useContext(UserContext);
-  const toast = useToast();
 
   const navigation =
     useNavigation<NativeStackNavigationProp<NonAuthStackParams>>();
 
   const handleInputChange = (
     value: string,
-    target: 'username' | 'password',
+    target: 'username' | 'password' | 'confirmPassword',
   ) => {
     setFormState({ ...formState, [target]: value });
   };
 
-  const handleSignIn = () => {
-    toast.hideAll();
-
-    if (
-      formState.password === 'admin' &&
-      formState.username === 'admin' &&
-      setLoggedUser
-    ) {
-      setLoggedUser({
-        name: formState.username,
-        token: 'some non-token value',
-        isLogged: true,
-      });
-      toast.show(`You have been logged in!`, {
-        duration: 4000,
-        animationType: 'zoom-in',
-        type: 'success',
-        placement: 'top',
-      });
-    } else {
-      toast.show(`Username & Password don't match!`, {
-        duration: 4000,
-        animationType: 'zoom-in',
-        type: 'danger',
-        placement: 'top',
-      });
-      console.log('wrong login attempt');
-    }
+  const handleSignUp = () => {
+    console.log(formState);
   };
 
   return (
@@ -72,13 +42,18 @@ export const SignInScreen: FC = () => {
         value={formState.password}
         type="password"
       />
+      <Text style={styles.label}>Confirm password</Text>
+      <ControlledInput
+        onChange={(val) => handleInputChange(val, 'confirmPassword')}
+        value={formState.confirmPassword}
+        type="password"
+      />
       <View style={[styles.buttonWrapper, { marginTop: 15 }]}>
         <Button
-          testID="signInButton"
-          title="Sign in!"
-          onPress={() => handleSignIn()}
+          title="Sign up!"
+          onPress={() => handleSignUp()}
           buttonStyle={{
-            backgroundColor: COLORS.PRIMARY,
+            backgroundColor: COLORS.SUCCESS,
             alignSelf: 'center',
           }}
           labelStyle={{ color: COLORS.LIGHT, fontSize: 20 }}
@@ -86,14 +61,14 @@ export const SignInScreen: FC = () => {
       </View>
       <View style={[styles.buttonWrapper, { marginTop: 30 }]}>
         <Button
-          title="Sign up here!"
+          title="Sign in here!"
           labelStyle={{ textDecorationLine: 'underline' }}
           buttonStyle={{
             marginHorizontal: 'auto',
           }}
           onPress={() => {
             setFormState(FormState);
-            navigation.navigate('SignUpScreen');
+            navigation.navigate('SignInScreen');
           }}
         />
       </View>
@@ -106,13 +81,13 @@ const styles = StyleSheet.create({
     height: '100%',
     backgroundColor: COLORS.COMPONENT.NON_AUTH_BG,
   },
-  label: {
-    fontSize: 20,
-    color: COLORS.LIGHT,
-  },
   buttonWrapper: {
     flex: 1,
     alignSelf: 'center',
     flexDirection: 'column',
+  },
+  label: {
+    fontSize: 20,
+    color: COLORS.LIGHT,
   },
 });
