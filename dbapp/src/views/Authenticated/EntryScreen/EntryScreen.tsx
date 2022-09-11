@@ -1,7 +1,7 @@
 import React, { FC, useContext, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { Button, ControlledInput } from 'components';
-import { COLORS } from 'constant';
+import { Button, ControlledInput } from '../../../components';
+import { COLORS } from '../../../constant';
 import { format } from 'date-fns';
 import { SugarContext } from '../../../context';
 import { useToast } from 'react-native-toast-notifications';
@@ -109,7 +109,7 @@ export const EntryScreen: FC = () => {
 };
 
 const styles = StyleSheet.create({
-  container: { width: 280, flex: 1, alignSelf: 'center' },
+  container: { width: 280, flex: 1, alignSelf: 'center', marginTop: 20 },
   contentWrapper: {
     height: '100%',
     backgroundColor: COLORS.COMPONENT.NON_AUTH_BG,

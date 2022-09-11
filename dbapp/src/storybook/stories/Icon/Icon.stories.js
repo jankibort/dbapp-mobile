@@ -7,11 +7,7 @@ const props = { color: 'black', size: 26 };
 
 storiesOf('Icon', module)
   .addDecorator((getStory) => (
-    <CenterView
-      desc={'Controlled Inputs link input field values with state value'}
-    >
-      {getStory()}
-    </CenterView>
+    <CenterView desc={'Icons used in app'}>{getStory()}</CenterView>
   ))
   .add('App Icons', () => (
     <>

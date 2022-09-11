@@ -1,8 +1,7 @@
 import { storiesOf } from '@storybook/react-native';
-import React, { useEffect } from 'react';
+import React from 'react';
 import CenterView from '../CenterView';
 import { ToastProvider, useToast } from 'react-native-toast-notifications';
-import { View } from 'react-native';
 import { Button } from '../../../components/Button';
 import { COLORS } from '../../../constant';
 
@@ -29,7 +28,9 @@ const ToastWrapperView = ({ type }) => {
 storiesOf('Toast', module)
   .addDecorator((getStory) => (
     <CenterView
-      desc={'Controlled Inputs link input field values with state value'}
+      desc={
+        'Toasts are pop-up notifications notifying user if action ended with a success or an error'
+      }
     >
       <ToastProvider>{getStory()}</ToastProvider>
     </CenterView>

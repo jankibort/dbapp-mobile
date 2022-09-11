@@ -14,7 +14,7 @@ export const ProfileStackScreen: FC = () => {
   return (
     <ProfileStack.Navigator
       initialRouteName="Profile"
-      screenOptions={{ headerShown: true }}
+      screenOptions={{ headerShown: false }}
     >
       <ProfileStack.Screen
         name="Profile"

@@ -2,7 +2,7 @@ import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React, { FC, useState } from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
-import { Button, ControlledInput } from '../../../components';
+import { Button, ControlledInput } from '../../components';
 import { COLORS } from '../../constant';
 import { NonAuthStackParams } from './NonAuthenticatedView';
 

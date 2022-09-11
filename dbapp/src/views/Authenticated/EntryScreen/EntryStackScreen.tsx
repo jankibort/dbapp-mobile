@@ -23,7 +23,7 @@ export const EntryStackScreen: FC = () => {
   return (
     <EntryStack.Navigator
       initialRouteName="Entry"
-      screenOptions={{ headerShown: true }}
+      screenOptions={{ headerShown: false }}
     >
       <EntryStack.Screen
         name="Entry"

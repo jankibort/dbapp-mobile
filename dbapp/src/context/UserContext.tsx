@@ -14,7 +14,7 @@ export type UserType = {
 const initialUser = {
   name: '',
   token: '',
-  isLogged: true,
+  isLogged: false,
 };
 
 export const UserCtxProvider: FC = ({ children }) => {

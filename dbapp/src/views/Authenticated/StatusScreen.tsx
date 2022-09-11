@@ -29,11 +29,13 @@ export const StatusScreen: FC = () => {
   return (
     <ScrollView style={styles.content}>
       {!latestSugar && latestInjections.length === 0 && (
-        <Text
-          style={{ color: COLORS.DANGER, fontSize: 20, fontWeight: 'bold' }}
-        >
-          Temporary lack of data :(
-        </Text>
+        <View style={[styles.card, { backgroundColor: COLORS.DANGER }]}>
+          <Text
+            style={{ color: COLORS.LIGHT, fontSize: 20, fontWeight: 'bold' }}
+          >
+            Temporary lack of data
+          </Text>
+        </View>
       )}
       {latestSugar && (
         <View
@@ -51,21 +53,15 @@ export const StatusScreen: FC = () => {
           </Text>
         </View>
       )}
-      {latestSugar && (
-        <View
-          style={[
-            styles.card,
-            latestSugar.range === 'low' && { backgroundColor: COLORS.DANGER },
-            latestSugar.range === 'ok' && { backgroundColor: COLORS.SUCCESS },
-            latestSugar.range === 'high' && { backgroundColor: COLORS.WARNING },
-          ]}
-        >
+      {latestSugar && latestSugar.range === 'low' && (
+        <View style={[styles.card, { backgroundColor: COLORS.DANGER }]}>
           <Text style={styles.label}>Action hints!</Text>
           <Text style={styles.label}>
-            {latestSugar.range === 'low' &&
-              `You require to eat aprox ${Math.round(
-                ((130 - latestSugar.value) * 10) / (isInsulinActive ? 20 : 37),
-              )} grams of carbohydrates! `}
+            You require to eat aprox
+            {Math.round(
+              ((130 - latestSugar.value) * 10) / (isInsulinActive ? 20 : 37),
+            )}{' '}
+            grams of carbohydrates!
             {isInsulinActive &&
               `You need to consume more due to active insulin.`}
           </Text>
@@ -74,17 +70,18 @@ export const StatusScreen: FC = () => {
       {latestInjections.map((e: InsulinRecordType) => (
         <View style={styles.card} key={String(e.dateTime)}>
           <Text style={styles.label}>
-            {e.amount} units | at {format(e.dateTime, 'HH:mm')}
-            {console.log(differenceInMinutes(date, e.dateTime))}
-            {differenceInMinutes(date, e.dateTime) < 180 && (
-              <>
-                <Text>{` |  insulin is active  `}</Text>
-                <MaterialCommunityIcons
-                  name="check-circle"
-                  color={COLORS.SUCCESS}
-                />
-              </>
-            )}
+            <>
+              {e.amount} units | at {format(e.dateTime, 'HH:mm')}
+              {differenceInMinutes(date, e.dateTime) < 180 && (
+                <>
+                  <Text>{` |  insulin is active  `}</Text>
+                  <MaterialCommunityIcons
+                    name="check-circle"
+                    color={COLORS.SUCCESS}
+                  />
+                </>
+              )}
+            </>
           </Text>
         </View>
       ))}

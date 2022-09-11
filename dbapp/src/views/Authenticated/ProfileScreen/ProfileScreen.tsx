@@ -1,8 +1,8 @@
 import React, { FC, useContext } from 'react';
 import { StyleSheet, Text } from 'react-native';
-import { Button } from 'components/Button';
-import { COLORS } from 'constant';
-import { UserContext } from 'context';
+import { Button } from '../../../components/Button';
+import { COLORS } from '../../../constant';
+import { UserContext } from '../../../context';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -33,6 +33,7 @@ const styles = StyleSheet.create({
   buttonsWrapper: {
     flex: 1,
     alignSelf: 'center',
+    marginTop: 20,
   },
   button: {
     marginTop: 20,

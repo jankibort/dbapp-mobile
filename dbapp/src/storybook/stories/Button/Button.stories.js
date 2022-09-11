@@ -2,7 +2,7 @@ import { storiesOf } from '@storybook/react-native';
 import React from 'react';
 import { Button } from '../../../components/Button';
 import CenterView from '../CenterView';
-import { COLORS } from '../../../../constants';
+import { COLORS } from '../../../constant';
 
 const props = {
   title: 'click here',
