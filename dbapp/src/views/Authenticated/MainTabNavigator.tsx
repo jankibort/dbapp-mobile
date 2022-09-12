@@ -17,6 +17,8 @@ export const MainTabNavigation =
   createMaterialBottomTabNavigator<AuthTabParams>();
 
 export const MainTabNavigator: FC = () => {
+  const mainTabIconSize = 26;
+
   return (
     <MainTabNavigation.Navigator
       initialRouteName="Status"
@@ -29,7 +31,11 @@ export const MainTabNavigator: FC = () => {
         options={{
           tabBarLabel: 'My Status',
           tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="home" color={color} size={26} />
+            <MaterialCommunityIcons
+              name="home"
+              color={color}
+              size={mainTabIconSize}
+            />
           ),
         }}
       />
@@ -42,7 +48,7 @@ export const MainTabNavigator: FC = () => {
             <MaterialCommunityIcons
               name="heart-plus-outline"
               color={color}
-              size={26}
+              size={mainTabIconSize}
             />
           ),
         }}
@@ -56,7 +62,7 @@ export const MainTabNavigator: FC = () => {
             <MaterialCommunityIcons
               name="human-child"
               color={color}
-              size={26}
+              size={mainTabIconSize}
             />
           ),
         }}

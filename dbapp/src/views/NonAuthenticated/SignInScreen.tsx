@@ -4,7 +4,6 @@ import React, { FC, useState } from 'react';
 import { useContext } from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { useToast } from 'react-native-toast-notifications';
-import { signIn } from '../../api/authService';
 import { Button, ControlledInput } from '../../components';
 import { COLORS } from '../../constant';
 import { UserContext } from '../../context';
