@@ -4,6 +4,7 @@ import React, { FC, useState } from 'react';
 import { useContext } from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { useToast } from 'react-native-toast-notifications';
+import { signIn } from '../../api/authService';
 import { Button, ControlledInput } from '../../components';
 import { COLORS } from '../../constant';
 import { UserContext } from '../../context';
@@ -74,7 +75,7 @@ export const SignInScreen: FC = () => {
       <View style={[styles.buttonWrapper, { marginTop: 15 }]}>
         <Button
           title="Sign in!"
-          onPress={() => handleSignIn()}
+          onPress={handleSignIn}
           buttonStyle={{
             backgroundColor: COLORS.PRIMARY,
             alignSelf: 'center',

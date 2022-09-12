@@ -5,9 +5,14 @@ import { COLORS } from '../../../constant';
 import { UserContext } from '../../../context';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { INITIAL_USER } from '../../../context/UserContext';
 
 export const ProfileScreen: FC = () => {
   const { setLoggedUser } = useContext(UserContext);
+
+  const signOut = () => {
+    setLoggedUser && setLoggedUser(INITIAL_USER);
+  };
 
   return (
     <SafeAreaView style={styles.buttonsWrapper}>
@@ -20,10 +25,7 @@ export const ProfileScreen: FC = () => {
             <MaterialCommunityIcons name="logout" size={20} />
           </>
         }
-        onPress={() => {
-          setLoggedUser &&
-            setLoggedUser({ isLogged: false, name: '', token: '' });
-        }}
+        onPress={signOut}
       />
     </SafeAreaView>
   );

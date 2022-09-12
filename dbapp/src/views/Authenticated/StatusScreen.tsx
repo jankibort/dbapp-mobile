@@ -1,12 +1,14 @@
-import { format } from 'date-fns';
 import React, { FC, useCallback, useContext, useState } from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
-import { COLORS } from '../../constant';
+import { COLORS, SUGAR_LEVEL_RANGE, TIME_INSULIN_ACTIVE } from '../../constant';
 import { SugarContext } from '../../context';
 import { InsulinRecordType } from '../../context/SugarContex';
 import { differenceInMinutes } from 'date-fns';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useFocusEffect } from '@react-navigation/native';
+import { getRangeColor } from '../../helpers/getRangeColor';
+import { getTimeFormatInHHmm } from '../../helpers/getTimeFormat';
+import { getCarboRequirement } from '../../helpers/getCarboRequirement';
 
 export const StatusScreen: FC = () => {
   const { sugarRecords, insulinRecords } = useContext(SugarContext);
@@ -20,6 +22,7 @@ export const StatusScreen: FC = () => {
 
   const latestSugar = sugarRecords[sugarRecords.length - 1];
   const latestInjections = insulinRecords.reverse().slice(0, 3);
+  const sugarRelatedBackgroundColor = getRangeColor(latestSugar?.range);
   const isInsulinActive =
     latestInjections.length !== 0 &&
     differenceInMinutes(date, latestInjections[0].dateTime) < 180
@@ -41,29 +44,32 @@ export const StatusScreen: FC = () => {
         <View
           style={[
             styles.card,
-            latestSugar.range === 'low' && { backgroundColor: COLORS.DANGER },
-            latestSugar.range === 'ok' && { backgroundColor: COLORS.SUCCESS },
-            latestSugar.range === 'high' && { backgroundColor: COLORS.WARNING },
+            { backgroundColor: sugarRelatedBackgroundColor },
           ]}
         >
           <Text style={styles.label}>Latest sugar</Text>
           <Text style={styles.label}>Level: {latestSugar.value} mg/dL</Text>
           <Text style={styles.label}>
-            Time: {format(latestSugar.dateTime, 'HH:mm')}
+            Time: <>{getTimeFormatInHHmm(latestSugar.dateTime)}</>
           </Text>
         </View>
       )}
-      {latestSugar && latestSugar.range === 'low' && (
-        <View style={[styles.card, { backgroundColor: COLORS.DANGER }]}>
+      {latestSugar && latestSugar.range === SUGAR_LEVEL_RANGE.HYPOGLYCEMIC && (
+        <View
+          style={[
+            styles.card,
+            { backgroundColor: sugarRelatedBackgroundColor },
+          ]}
+        >
           <Text style={styles.label}>Action hints!</Text>
           <Text style={styles.label}>
-            You require to eat aprox
-            {Math.round(
-              ((130 - latestSugar.value) * 10) / (isInsulinActive ? 20 : 37),
-            )}{' '}
-            grams of carbohydrates!
-            {isInsulinActive &&
-              `You need to consume more due to active insulin.`}
+            <>
+              You require to eat aprox{' '}
+              {getCarboRequirement(latestSugar.value, isInsulinActive)} grams of
+              carbohydrates!
+              {isInsulinActive &&
+                `You need to consume more due to active insulin.`}
+            </>
           </Text>
         </View>
       )}
@@ -71,8 +77,8 @@ export const StatusScreen: FC = () => {
         <View style={styles.card} key={String(e.dateTime)}>
           <Text style={styles.label}>
             <>
-              {e.amount} units | at {format(e.dateTime, 'HH:mm')}
-              {differenceInMinutes(date, e.dateTime) < 180 && (
+              {e.amount} units | at {getTimeFormatInHHmm(e.dateTime)}
+              {differenceInMinutes(date, e.dateTime) < TIME_INSULIN_ACTIVE && (
                 <>
                   <Text>{` |  insulin is active  `}</Text>
                   <MaterialCommunityIcons

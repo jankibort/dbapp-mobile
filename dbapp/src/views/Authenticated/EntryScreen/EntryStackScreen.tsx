@@ -12,6 +12,10 @@ export type EntryStackParams = {
 
 const EntryStack = createNativeStackNavigator<EntryStackParams>();
 
+/**
+ *
+ * @returns stack component which is wrapper to create nested stack navigation insinde tab nav
+ */
 export const EntryStackScreen: FC = () => {
   const navigation =
     useNavigation<NativeStackNavigationProp<EntryStackParams>>();

@@ -11,14 +11,14 @@ export type UserType = {
   isLogged: boolean;
 };
 
-const initialUser = {
+export const INITIAL_USER = {
   name: '',
   token: '',
   isLogged: false,
 };
 
 export const UserCtxProvider: FC = ({ children }) => {
-  const [loggedUser, setLoggedUser] = useState<UserType>(initialUser);
+  const [loggedUser, setLoggedUser] = useState<UserType>(INITIAL_USER);
 
   return (
     <UserContext.Provider
@@ -33,6 +33,6 @@ export const UserCtxProvider: FC = ({ children }) => {
 };
 
 export const UserContext = createContext<UserContextType>({
-  loggedUser: initialUser,
+  loggedUser: INITIAL_USER,
   setLoggedUser: () => {},
 });

@@ -10,6 +10,10 @@ export type ProfileStackParams = {
 
 const ProfileStack = createNativeStackNavigator<ProfileStackParams>();
 
+/**
+ *
+ * @returns stack component which is wrapper to create nested stack navigation insinde tab nav
+ */
 export const ProfileStackScreen: FC = () => {
   return (
     <ProfileStack.Navigator

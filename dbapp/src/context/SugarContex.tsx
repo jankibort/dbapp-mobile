@@ -1,4 +1,5 @@
 import { useState, createContext, FC, SetStateAction, Dispatch } from 'react';
+import { TSugarLevelRangeValues } from '../Types/sugarRanges';
 
 type SugarContextType = {
   insulinRecords: InsulinRecordType[];
@@ -12,7 +13,7 @@ export type InsulinRecordType = {
   amount: number;
 };
 
-export type SugarRangesType = 'low' | 'ok' | 'high';
+export type SugarRangesType = TSugarLevelRangeValues;
 
 export type SugarRecordType = {
   dateTime: Date;

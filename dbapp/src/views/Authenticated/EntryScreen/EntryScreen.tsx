@@ -2,10 +2,9 @@ import React, { FC, useContext, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Button, ControlledInput } from '../../../components';
 import { COLORS } from '../../../constant';
-import { format } from 'date-fns';
 import { SugarContext } from '../../../context';
 import { useToast } from 'react-native-toast-notifications';
-import { SugarRangesType } from '../../../context/SugarContex';
+import { getSugarRange } from '../../../helpers/getSugarRange';
 
 const FormState = {
   insulinAmount: '',
@@ -17,19 +16,6 @@ export const EntryScreen: FC = () => {
   const { setInsulinRecord, setSugarRecord } = useContext(SugarContext);
 
   const toast = useToast();
-
-  const getSugarRange = (value: number): SugarRangesType => {
-    switch (true) {
-      case value < 90:
-        return 'low';
-      case value >= 90 && value < 140:
-        return 'ok';
-      case value >= 140:
-        return 'high';
-      default:
-        return 'ok';
-    }
-  };
 
   const handleSubmit = () => {
     if (formState.insulinAmount || formState.sugarLevel) {
